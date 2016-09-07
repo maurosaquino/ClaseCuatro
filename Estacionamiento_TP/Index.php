@@ -11,7 +11,7 @@
 		<form action="nexo.php" method="post">
 		<h1>SISTEMA DE INGRESO DE ESTACIONAMIENTO</h1>
 
-			<input type="text" name="patente"><BR><BR>
+			<input type="text" placeholder="Ingrese patente..." name="patente" required oninvalid="this.setCustomValidity('La patente no puede estar vacia')"><BR><BR>
 			<div id="MiBotonUTNMenuInicio">
 			<input id="button" type="submit" value="Estacionar" name="accion">   
 			<input id="button" type="submit" value="Leer" name="accion"> 
