@@ -26,7 +26,8 @@
 </html>
 
 <?php
-
+	
+	
 	
 	require_once('class\estacionamiento.php');
 				
