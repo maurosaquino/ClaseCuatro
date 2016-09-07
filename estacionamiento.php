@@ -58,7 +58,15 @@
 			if($_auto[0] == $patente){
 
 				$_inicio = $_auto[1];
-		
+				$_ahora = date('Y-m-d H:i:s');
+
+				$_diferencia = strtotime($_ahora) - strtotime($_inicio);
+
+				//SE GUARDA EN TICKET.TXT
+				$_importe = $_diferencia * 10;
+				
+				echo "$_importe <br>";
+
 			}
 					
 		}

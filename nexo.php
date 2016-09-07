@@ -25,9 +25,11 @@
 
 		}else{
 
-
-
-
+		require_once('estacionamiento.php');
+		estacionamiento::Sacar($_patente);
+		echo '<form method="post" action="Index.php">
+			  <input type="submit" value="Volver">
+			  </form>';
 
 		}
 
