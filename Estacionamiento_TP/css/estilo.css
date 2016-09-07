@@ -13,6 +13,7 @@ table {
   margin: 30px auto;
   text-align: left;
   width: 800px;
+  color:#000;
 } 
 
 th {
@@ -101,7 +102,7 @@ tbody:hover tr:hover td {
 
 /*FIN TABLA*/
 
-body {
+body{
   margin: 0 auto;
   color:#f0f0f0;
   background-image: url('http://imgview.info/download/20150705/auto-audi-a4-parking-lot-underground-2560x1600.jpg');

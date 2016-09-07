@@ -27,7 +27,7 @@
 
 <?php
 
-	require_once("nexo.php");
+	
 	require_once('class\estacionamiento.php');
 				
 	$listautos = array();
