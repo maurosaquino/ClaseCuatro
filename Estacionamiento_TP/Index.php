@@ -8,12 +8,17 @@
 
 	<div class="CajaInicio animated bounceIn">
 
-		<form id="FormIngreso" action="nexo.php" method="post">
-			<input type="text" name="patente">
-			<input class="MiBotonUTNMenuInicio" type="submit" value="Estacionar" name="accion"> 
-			<input class="MiBotonUTNMenuInicio" type="submit" value="Leer" name="accion">
-			<input class="MiBotonUTNMenuInicio" type="submit" value="Sacar" name="accion">
+		<form action="nexo.php" method="post">
+		<h1>SISTEMA DE INGRESO DE ESTACIONAMIENTO</h1>
+
+			<input type="text" name="patente"><BR><BR>
+			<div id="MiBotonUTNMenuInicio">
+			<input id="button" type="submit" value="Estacionar" name="accion">   
+			<input id="button" type="submit" value="Leer" name="accion"> 
+			<input id="button" type="submit" value="Sacar" name="accion"> 
+			</div>
 		</form>
+		<BR>
 
 	</div>
 
@@ -23,8 +28,12 @@
 <?php
 
 	require_once("nexo.php");
+	require_once('class\estacionamiento.php');
+				
+	$listautos = array();
+	$listautos = estacionamiento::Leer();
+	estacionamiento::GenerarTabla($listautos);
 
-	/* PARA CAMBIAR DE MANERA DINAMICA UN ATRIBUTO EN EL TAG
-	<body style="background: <?php echo $_GET['Color']; ?>" >*/
-
+	include('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\html\listado.html');
+	
 ?>

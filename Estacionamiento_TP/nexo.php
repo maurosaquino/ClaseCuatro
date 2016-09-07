@@ -13,21 +13,15 @@
 
 		header('location:Index.php');
 
-		}elseif($_accion=="Leer"){
+		}elseif($_POST['accion']=='Leer'){
 
-		require_once('class\estacionamiento.php');
-		estacionamiento::Guardar($_patente);
-		$_milistado = array();
-		$_milistado = estacionamiento::Leer();
-		var_dump($_milistado);
-		echo '<form method="post" action="Index.php">
-			  <input type="submit" value="Volver">
-			  </form>';
+				header('location:Index.php');
 
 		}else{
 
 		require_once('class\estacionamiento.php');
-		estacionamiento::Sacar($_patente);
+		$retorno = estacionamiento::Sacar($_patente);
+		echo $retorno;
 		echo '<form method="post" action="Index.php">
 			  <input type="submit" value="Volver">
 			  </form>';

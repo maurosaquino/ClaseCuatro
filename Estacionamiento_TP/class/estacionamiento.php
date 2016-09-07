@@ -1,6 +1,6 @@
 <?php
 
-	class estacionamiento{
+class estacionamiento{
 
 
 	static function Guardar($patente){
@@ -16,14 +16,11 @@
 
 		//CIERRE DE ARCHIVO
 		fclose($miarchivo);
-
-
 	}
-
 
 	static function Leer(){
 
-		$listadoautos = array();
+		$_listadoautos = array();
 
 		$miarchivo = fopen('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\txt\estacionados.txt',"r");
 
@@ -45,9 +42,7 @@
 			fclose($miarchivo);
 
 		return $_listadoautos;
-
 	}
-
 
 	static function Sacar($patente){
 
@@ -64,7 +59,7 @@
 				$_diferencia = strtotime($_ahora) - strtotime($_inicio);
 
 				//SE GUARDA EN TICKET.TXT
-				$_importe = ($_diferencia/3600) * 80;
+				$_importe = round((($_diferencia/3600) * 80),2);
 				
 				estacionamiento::Facturar($patente,$_inicio,$_importe,$_ahora);
 
@@ -88,9 +83,11 @@
 			}
 
 			fclose($miarchivo);
+			
+			$ticket = estacionamiento::Ticket($patente,$_inicio,$_importe,$_ahora);
+			return $ticket;
 		}
 	}
-
 
 	static function Facturar($auto,$ingreso,$importe,$egreso){
 
@@ -101,15 +98,47 @@
 		fwrite($miarchivo,$_renglon);
 
 		fclose($miarchivo);
-
-
-
 	}
 
+	static function  Ticket($auto,$ingreso,$importe,$egreso){
 
+		$ticket = '<div>
+		<table>
+		  <tr><th>ESTACIONAMIENTO UTNFRA</th></tr>
+		  <tr><td>TICKET</td></tr>
+		  <tr><td>PATENTE:'. $auto.'<br></td></tr>
+		  <tr><td>INGRESO:'. $ingreso.'<br></td>
+		  <td>EGRESO :'. $egreso. '<br></td></tr>
+		  <tr><td>IMPORTE: $'.$importe.'</td></tr>
+		</table>  
+		  </div>';	
 
-
+		  return $ticket;
 	}
+
+	static function GenerarTabla($listautos){
+
+		$miarchivo = fopen('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\html\listado.html',"w");
+ 	
+ 		$renglon ='<table>
+		<tr><th>PATENTE</th><th>INGRESO</th></tr>
+		<tr>';
+
+		foreach($listautos as $auto){
+
+		  $renglon = $renglon . '<td>'.$auto[0].'</td><td>'.$auto[1].'</td></tr>';
+		  
+		 } 
+
+		$renglon = $renglon . '</table></div>';
+
+
+		fwrite($miarchivo,$renglon);
+
+		fclose($miarchivo);
+	}
+
+}
 
 
 ?>
