@@ -11,7 +11,8 @@
 		<form id="FormIngreso" action="nexo.php" method="post">
 			<input type="text" name="patente">
 			<input class="MiBotonUTNMenuInicio" type="submit" value="Estacionar" name="accion"> 
-			<input class="MiBotonUTNMenuInicio" type="submit" value="Salir" name="accion">
+			<input class="MiBotonUTNMenuInicio" type="submit" value="Leer" name="accion">
+			<input class="MiBotonUTNMenuInicio" type="submit" value="Sacar" name="accion">
 		</form>
 
 	</div>

@@ -11,10 +11,27 @@
 		require_once('estacionamiento.php');
 		estacionamiento::Guardar($_patente);
 
+		header('location:Index.php');
+
+		}elseif($_accion=="Leer"){
+
+		require_once('estacionamiento.php');
+		$_milistado = array();
+		$_milistado = estacionamiento::Leer();
+		var_dump($_milistado);
+		echo '<form method="post" action="Index.php">
+			  <input type="submit" value="Volver">
+			  </form>';
+
+		}else{
+
+
+
+
+
 		}
 
 
-		header('location:Index.php');
 	}
 
 
