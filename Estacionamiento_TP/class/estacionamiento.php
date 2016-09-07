@@ -58,7 +58,6 @@ class estacionamiento{
 				$_ahora = date('Y-m-d H:i:s');
 				$_diferencia = strtotime($_ahora) - strtotime($_inicio);
 
-				//SE GUARDA EN TICKET.TXT
 				$_importe = round((($_diferencia/3600) * 80),2);
 				
 				estacionamiento::Facturar($patente,$_inicio,$_importe,$_ahora);
@@ -91,9 +90,18 @@ class estacionamiento{
 
 	static function Facturar($auto,$ingreso,$importe,$egreso){
 
-		$miarchivo = fopen('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\txt\facturacion.txt',"a");
+		$fexists = file_exists('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\txt\facturacion.csv');
 
-		$_renglon = $auto."=>".$ingreso."=>".$egreso."=> $".$importe."\n";
+		$miarchivo = fopen('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\txt\facturacion.csv',"a");
+
+
+		if($fexists==FALSE){
+
+			$_renglon = "Patente; Hora_Ingreso ; Hora_Egreso ; Importe_Cobrado \n";
+			fwrite($miarchivo,$_renglon);
+		}
+
+		$_renglon = $auto.";".$ingreso.";".$egreso.";".$importe."\n";
 
 		fwrite($miarchivo,$_renglon);
 
