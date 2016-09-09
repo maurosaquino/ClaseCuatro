@@ -5,7 +5,7 @@
 	if (isset($_POST['accion'])){
 
 
-		$_patente 	= strtoupper($_POST['patente']);
+		$_patente 	= trim(strtoupper($_POST['patente']));
 		$_accion 	= $_POST['accion'];
 
 		if($_accion=='Estacionar'){
