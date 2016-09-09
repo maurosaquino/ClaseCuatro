@@ -1,0 +1,29 @@
+
+body{
+  margin: 0 auto;
+  width:600px;
+  height:400px;
+  max-height: 400px;
+  max-width: 600px;
+  font-family:'Open Sans',sans-serif;
+}
+
+div {
+  width: 700px;
+  height: 600px;
+  display: block;
+  position: relative;
+}
+
+div::after {
+  content: "";
+  background: url(http://www.freeiconspng.com/uploads/error-icon-28.png);
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}

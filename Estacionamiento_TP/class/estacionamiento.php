@@ -69,6 +69,7 @@ class estacionamiento{
 
 		if ($_remover == true){
 
+
 			$miarchivo = fopen('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\txt\estacionados.txt',"w");
 			
 			foreach($_listadoestacionados as $_auto){	
@@ -145,6 +146,34 @@ class estacionamiento{
 
 		fclose($miarchivo);
 	}
+
+	static function BuscarPatente($patente){
+
+		$miarchivo = fopen('./txt/estacionados.txt',"r");
+
+		while (!feof($miarchivo)){
+
+			$_renglon=fgets($miarchivo);
+			$_auto=explode("=>",$_renglon);
+			
+			echo $_auto[0];
+
+			if($_auto[0]==$patente){
+				
+				fclose($miarchivo);
+				return TRUE;
+			
+			} else {
+
+				
+				
+			}
+		}
+		fclose($miarchivo);
+		return FALSE;
+
+	}
+
 
 }
 

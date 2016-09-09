@@ -27,7 +27,9 @@
 
 <?php
 	
-	
+	if(isset($_REQUEST['accion'])){
+	echo '<script> window.onload = window.open ("error.html","mywindow","menubar=0,resizable=1,width=550,height=450");</script>';
+	}
 	
 	require_once('class\estacionamiento.php');
 				
@@ -36,5 +38,5 @@
 	estacionamiento::GenerarTabla($listautos);
 
 	include('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\html\listado.html');
-	
+
 ?>
