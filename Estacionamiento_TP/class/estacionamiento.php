@@ -9,7 +9,7 @@ class estacionamiento{
 		$_renglon = $patente . "=>" . $_fecha . "\n";
 
 		//APERTURA DEL ARCHIVO: fopen(nombre_archivo,tipo_atributo_lectura_escritura_y_si_sobreescribe)
-		$miarchivo = fopen('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\txt\estacionados.txt',"a");
+		$miarchivo = fopen('.\txt\estacionados.txt',"a");
 
 		//ESCRITURA DEL ARCHIVO: fwrite(puntero_al_archivo,parametro_de_Escritura) 
 		fwrite($miarchivo,$_renglon);
@@ -54,6 +54,8 @@ class estacionamiento{
 			if($_auto[0] == $patente){
 
 				$_inicio = $_auto[1];
+
+
 				$_inicio = str_replace("\n","",$_inicio);
 				$_ahora = date('Y-m-d H:i:s');
 				$_diferencia = strtotime($_ahora) - strtotime($_inicio);
@@ -70,7 +72,7 @@ class estacionamiento{
 		if ($_remover == true){
 
 
-			$miarchivo = fopen('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\txt\estacionados.txt',"w");
+			$miarchivo = fopen('.\txt\estacionados.txt',"w");
 			
 			foreach($_listadoestacionados as $_auto){	
 				
@@ -84,16 +86,16 @@ class estacionamiento{
 
 			fclose($miarchivo);
 			
-			$ticket = estacionamiento::Ticket($patente,$_inicio,$_importe,$_ahora);
-			return $ticket;
+			$comprobante = estacionamiento::Comprobante($patente,$_inicio,$_importe,$_ahora);
+			return $comprobante;
 		}
 	}
 
 	static function Facturar($auto,$ingreso,$importe,$egreso){
 
-		$fexists = file_exists('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\txt\facturacion.csv');
+		$fexists = file_exists('.\txt\facturacion.csv');
 
-		$miarchivo = fopen('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\txt\facturacion.csv',"a");
+		$miarchivo = fopen('.\txt\facturacion.csv',"a");
 
 
 		if($fexists==FALSE){
@@ -109,12 +111,12 @@ class estacionamiento{
 		fclose($miarchivo);
 	}
 
-	static function  Ticket($auto,$ingreso,$importe,$egreso){
+	static function  Comprobante($auto,$ingreso,$importe,$egreso){
 
 		$ticket = '<div>
 		<table>
 		  <tr><th>ESTACIONAMIENTO UTNFRA</th></tr>
-		  <tr><td>TICKET</td></tr>
+		  <tr><td>COMPROBANTE</td></tr>
 		  <tr><td>PATENTE:'. $auto.'<br></td></tr>
 		  <tr><td>INGRESO:'. $ingreso.'<br></td>
 		  <td>EGRESO :'. $egreso. '<br></td></tr>
@@ -156,8 +158,6 @@ class estacionamiento{
 			$_renglon=fgets($miarchivo);
 			$_auto=explode("=>",$_renglon);
 			
-			echo $_auto[0];
-
 			if($_auto[0]==$patente){
 				
 				fclose($miarchivo);
@@ -171,8 +171,46 @@ class estacionamiento{
 		}
 		fclose($miarchivo);
 		return FALSE;
-
 	}
+
+	static function GenerarError($error){
+
+		$miarchivo = fopen('.\html\error.html',"w");
+ 		
+ 		if($error=='errorestacionar'){	
+
+ 		$renglon ='<!DOCTYPE html>
+			 		<html>
+					<head>
+						<title>Estacionamiento - Error</title>
+						<link rel="stylesheet" type="text/css" href="..\css\estiloerrorguardado.css">
+					</head>
+					<body>
+					<div class="Error">
+					<h1>EL AUTO YA SE ENCUENTRA EN EL ESTACIONAMIENTO</h1>
+					</div>
+					</body>
+					</html>';
+		}elseif($error=='errorsacar'){
+		$renglon ='<!DOCTYPE html>
+			 		<html>
+					<head>
+						<title>Estacionamiento - Error</title>
+						<link rel="stylesheet" type="text/css" href="..\css\estiloerrorguardado.css">
+					</head>
+					<body>
+					<div class="Error">
+					<h1>EL AUTO NO SE ENCUENTRA EN EL ESTACIONAMIENTO</h1>
+					</div>
+					</body>
+					</html>';
+		}
+
+		fwrite($miarchivo,$renglon);
+
+		fclose($miarchivo);
+	}
+
 
 
 }

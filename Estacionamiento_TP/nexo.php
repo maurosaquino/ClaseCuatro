@@ -14,22 +14,27 @@
 		
 				$verificacion = estacionamiento::BuscarPatente($_patente);
 
-				echo $verificacion;
-
 				if($verificacion == FALSE){
 				
 						estacionamiento::Guardar($_patente);
 						//header('location:Index.php');
 
+						header('location:Index.php?accion="guardado"');
+
 						} else {
 
-						header('location:Index.php?accion="error"');
+						$tipoerror = 'errorestacionar';
+						estacionamiento::GenerarError($tipoerror);	
+						header('location:Index.php?accion="errorestacionar"');
 				}
-
 		}elseif($_POST['accion']=='Sacar'){
 
-						header('location:Index.php?accion="yaesta"');
-						require_once('class\estacionamiento.php');
+				require_once('class\estacionamiento.php');
+
+				$verificacion = estacionamiento::BuscarPatente($_patente);
+	
+				if($verificacion == TRUE){
+
 						$retorno = estacionamiento::Sacar($_patente);
 						echo $retorno;
 						echo '<head><link rel="stylesheet" type="text/css" href="css\estilo.css"></head>
@@ -44,11 +49,18 @@
 							  <input id="button" type="submit" value="Imprimir"  name="opcion" onClick= "vImprimir(); window.print();">
 							  </div>
 							  </form>';
-		}else{
-				header('location:Index.php');
+			
+						} else {
+
+						$tipoerror = 'errorsacar';
+						estacionamiento::GenerarError($tipoerror);
+						header('location:Index.php?accion=errorsacar');
+	
+				}
 		}
 
-	} 
+	}
+
 	
 //
 
