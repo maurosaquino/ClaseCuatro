@@ -22,7 +22,7 @@ class estacionamiento{
 
 		$_listadoautos = array();
 
-		$miarchivo = fopen('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\txt\estacionados.txt',"r");
+		$miarchivo = fopen('.\txt\estacionados.txt',"r");
 
 		//file end of file "feof()" dice si finalizò el archivo, retorna true (si el archivo termino) o false si el archivo no se acabo.
 
@@ -129,7 +129,7 @@ class estacionamiento{
 
 	static function GenerarTabla($listautos){
 
-		$miarchivo = fopen('C:\xampp\htdocs\ClaseCuatro\Estacionamiento_TP\html\listado.html',"w");
+		$miarchivo = fopen('.\html\listado.html',"w");
  	
  		$renglon ='<table>
 		<tr><th>PATENTE</th><th>INGRESO</th></tr>
